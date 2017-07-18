@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		FB8D52051F1CB85000C1C299 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D52041F1CB85000C1C299 /* main.swift */; };
 		FB8D520A1F1CB88E00C1C299 /* printc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D52091F1CB88E00C1C299 /* printc.swift */; };
-		FB8D520E1F1CD18600C1C299 /* printc.c in Sources */ = {isa = PBXBuildFile; fileRef = FB8D520C1F1CD18600C1C299 /* printc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,8 +27,6 @@
 		FB8D52021F1CB85000C1C299 /* printc-swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "printc-swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8D52041F1CB85000C1C299 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FB8D52091F1CB88E00C1C299 /* printc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = printc.swift; sourceTree = "<group>"; };
-		FB8D520B1F1CD18500C1C299 /* printc-swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "printc-swift-Bridging-Header.h"; sourceTree = "<group>"; };
-		FB8D520C1F1CD18600C1C299 /* printc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = printc.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +61,6 @@
 			children = (
 				FB8D52041F1CB85000C1C299 /* main.swift */,
 				FB8D52091F1CB88E00C1C299 /* printc.swift */,
-				FB8D520C1F1CD18600C1C299 /* printc.c */,
-				FB8D520B1F1CD18500C1C299 /* printc-swift-Bridging-Header.h */,
 			);
 			path = "printc-swift";
 			sourceTree = "<group>";
@@ -130,7 +125,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8D52051F1CB85000C1C299 /* main.swift in Sources */,
-				FB8D520E1F1CD18600C1C299 /* printc.c in Sources */,
 				FB8D520A1F1CB88E00C1C299 /* printc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,7 +227,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "printc-swift/printc-swift-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -245,7 +239,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "printc-swift/printc-swift-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -269,6 +263,7 @@
 				FB8D52081F1CB85000C1C299 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
