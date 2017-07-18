@@ -31,7 +31,7 @@ printc.write("int ", .red)._("main(")._("int", .red)._(" argc, ")
 ```
 Looks like:
 
-![prints](/Users/hejunqiu/github-repo/printc/img/prints.png)
+![prints](img/prints.png)
 
 # LICENSE
 
