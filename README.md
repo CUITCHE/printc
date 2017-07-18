@@ -22,7 +22,7 @@ printc.print(text: "0;\n}\n")
 printc.print(text: "\t\t\tby:printc\n\n", marks: .obscure, .purple)
 ```
 
-2. Save text and print it before printc object destroying.
+2. Assemble texts and print them before printc object destroying.
 ```swift
 printc.write("int ", .red)._("main(")._("int", .red)._(" argc, ")
 ._("char ", .red)._("*", .purple)._("argv[]) {\n")._("    printf", .navy)
