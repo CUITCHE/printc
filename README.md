@@ -31,11 +31,7 @@ printc.write("int ", .red)._("main(")._("int", .red)._(" argc, ")
 ```
 Looks like:
 
-<font color=red>int</font> main(<font color=red>int</font> argc, <font color=red>char</font> <font color=purple>*</font>argv[]) {</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<font color=navy>printf</font>(<b><font color=red>"Hello World!"</font></b>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<font color=red>return</font> 0;</br>
-}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color=purple>by: printc</font>
+![prints](/Users/hejunqiu/github-repo/printc/img/prints.png)
 
 # LICENSE
 
