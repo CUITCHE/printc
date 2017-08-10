@@ -118,6 +118,7 @@ namespace printcolor {
     {
         std::string buffer;
         assemble<sizeof...(marks)>(text, buffer, { std::forward<Mark>(marks)... });
+        fputs(buffer.c_str(), stderr);
     }
     
     template<size_t arraySize>
