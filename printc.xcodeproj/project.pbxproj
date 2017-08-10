@@ -9,10 +9,20 @@
 /* Begin PBXBuildFile section */
 		FB8D52051F1CB85000C1C299 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D52041F1CB85000C1C299 /* main.swift */; };
 		FB8D520A1F1CB88E00C1C299 /* printc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D52091F1CB88E00C1C299 /* printc.swift */; };
+		FBCC672C1F399B2D00FB0CFC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCC672B1F399B2D00FB0CFC /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		FB8D52001F1CB85000C1C299 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		FBCC67271F399B2D00FB0CFC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -27,10 +37,20 @@
 		FB8D52021F1CB85000C1C299 /* printc-swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "printc-swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8D52041F1CB85000C1C299 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FB8D52091F1CB88E00C1C299 /* printc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = printc.swift; sourceTree = "<group>"; };
+		FBCC67291F399B2D00FB0CFC /* printc-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "printc-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBCC672B1F399B2D00FB0CFC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FBCC67311F399B4100FB0CFC /* printc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = printc.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		FB8D51FF1F1CB85000C1C299 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBCC67261F399B2D00FB0CFC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -44,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				FB8D52031F1CB85000C1C299 /* printc-swift */,
+				FBCC672A1F399B2D00FB0CFC /* printc-cpp */,
 				FB8D51F21F1CAEED00C1C299 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				FB8D52021F1CB85000C1C299 /* printc-swift */,
+				FBCC67291F399B2D00FB0CFC /* printc-cpp */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,6 +85,15 @@
 				FB8D52091F1CB88E00C1C299 /* printc.swift */,
 			);
 			path = "printc-swift";
+			sourceTree = "<group>";
+		};
+		FBCC672A1F399B2D00FB0CFC /* printc-cpp */ = {
+			isa = PBXGroup;
+			children = (
+				FBCC672B1F399B2D00FB0CFC /* main.cpp */,
+				FBCC67311F399B4100FB0CFC /* printc.hpp */,
+			);
+			path = "printc-cpp";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +116,23 @@
 			productReference = FB8D52021F1CB85000C1C299 /* printc-swift */;
 			productType = "com.apple.product-type.tool";
 		};
+		FBCC67281F399B2D00FB0CFC /* printc-cpp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBCC672F1F399B2D00FB0CFC /* Build configuration list for PBXNativeTarget "printc-cpp" */;
+			buildPhases = (
+				FBCC67251F399B2D00FB0CFC /* Sources */,
+				FBCC67261F399B2D00FB0CFC /* Frameworks */,
+				FBCC67271F399B2D00FB0CFC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "printc-cpp";
+			productName = "printc-cpp";
+			productReference = FBCC67291F399B2D00FB0CFC /* printc-cpp */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -98,6 +146,10 @@
 					FB8D52011F1CB85000C1C299 = {
 						CreatedOnToolsVersion = 8.3.3;
 						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+					FBCC67281F399B2D00FB0CFC = {
+						CreatedOnToolsVersion = 8.3.3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -115,6 +167,7 @@
 			projectRoot = "";
 			targets = (
 				FB8D52011F1CB85000C1C299 /* printc-swift */,
+				FBCC67281F399B2D00FB0CFC /* printc-cpp */,
 			);
 		};
 /* End PBXProject section */
@@ -126,6 +179,14 @@
 			files = (
 				FB8D52051F1CB85000C1C299 /* main.swift in Sources */,
 				FB8D520A1F1CB88E00C1C299 /* printc.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FBCC67251F399B2D00FB0CFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBCC672C1F399B2D00FB0CFC /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,10 +298,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		FBCC672D1F399B2D00FB0CFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FBCC672E1F399B2D00FB0CFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				DEPLOYMENT_POSTPROCESSING = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -261,6 +340,15 @@
 			buildConfigurations = (
 				FB8D52071F1CB85000C1C299 /* Debug */,
 				FB8D52081F1CB85000C1C299 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBCC672F1F399B2D00FB0CFC /* Build configuration list for PBXNativeTarget "printc-cpp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBCC672D1F399B2D00FB0CFC /* Debug */,
+				FBCC672E1F399B2D00FB0CFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
