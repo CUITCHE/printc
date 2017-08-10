@@ -24,7 +24,7 @@ import Foundation
 ///     ._(" argc, ")._("char ", .red)._("*", .purple)
 ///     ._("argv[])")
 ///     // Prints int main(int argc, char *argv[]) with colors.
-/// 
+///
 /// Also see function notes.
 open class printc {
     private var buf: String = ""
@@ -105,6 +105,13 @@ open class printc {
         var buffer = ""
         assemble(text: text, in: &buffer, with: marks)
         fputs(buffer, stderr)
+    }
+
+    public func takeAssembleBuffer() -> String {
+        defer {
+            buf.removeAll()
+        }
+        return buf
     }
 }
 
