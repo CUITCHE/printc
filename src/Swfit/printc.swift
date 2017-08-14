@@ -82,7 +82,7 @@ open class printc {
 
     /// Write the text with marks.
     ///
-    ///     printc.write("Hello", .red)._("World!", .bold, .Red, .yellow)
+    ///     printc.write("Hello", .red).append("World!", .bold, .Red, .yellow)
     ///     // Prints "Hello World!"
     ///     // "Hello" has red foreground.
     ///     // "World!" has a red backgournd and yellow font and bold attribute.
@@ -91,8 +91,26 @@ open class printc {
     ///   - str: A text will be written.
     ///   - marks: An array of mark.
     /// - Returns: Return self.
-    @discardableResult public func `_`(_ str: String, _ marks: Mark...) -> printc {
+    @discardableResult public func write(_ str: String, _ marks: Mark...) -> printc {
         printc.assemble(text: str, in: &buf, with: marks)
+        return self
+    }
+
+    /// Write the str with a '\n' character. Use `_`(::) or write(::) method
+    /// to write str which you want to write a '\n' may be like:
+    ///
+    ///     printc.write("Mark the str contains \\n in mark code.\n", .red)
+    ///     // Raw string is "[31mMark the str contains \\n in mark code.\n[0m".
+    ///     // That cause the console right side left a red backgroud.
+    ///
+    /// Use this method to resolve it.
+    ///
+    /// - Parameters:
+    ///   - str: A text will be written.
+    ///   - marks: An array of mark.
+    /// - Returns: the self of invoking object.
+    @discardableResult public func writeln(_ str: String, _ marks: Mark...) -> printc {
+        printc.assemble(text: str, in: &buf, with: marks, appendNewline: true)
         return self
     }
 
@@ -107,6 +125,21 @@ open class printc {
         fputs(buffer, stderr)
     }
 
+    /// Print the text with marks and '\n'
+    ///
+    /// - Parameters:
+    ///   - text: The text will be modify some color or other mark by marks
+    ///   - marks: see enum `Mark`
+    public static func println(text: String, marks: Mark...) {
+        var buffer = ""
+        assemble(text: text, in: &buffer, with: marks, appendNewline: true)
+        fputs(buffer, stderr)
+    }
+
+    /// Return the buffer and clean the buffer. If you use this method that means you want
+    /// to controle the buffer.
+    ///
+    /// - Returns: String buffer content.
     public func takeAssembleBuffer() -> String {
         defer {
             buf.removeAll()
@@ -116,9 +149,9 @@ open class printc {
 }
 
 fileprivate extension printc {
-    fileprivate static func assemble(text: String, in buffer: inout String, with marks: [Mark]) {
+    fileprivate static func assemble(text: String, in buffer: inout String, with marks: [Mark], appendNewline: Bool = false) {
         if marks.count == 0 {
-            buffer.append(text)
+            appendNewline ? buffer.append("\(text)\n") : buffer.append(text)
             return
         }
         buffer.append("\u{001b}[")
@@ -126,6 +159,6 @@ fileprivate extension printc {
             buffer.append("\(m.rawVal);")
         }
         buffer.remove(at: buffer.index(before: buffer.endIndex))
-        buffer.append("m\(text)\u{001b}[0m")
+        appendNewline ? buffer.append("m\(text)\u{001b}[0m\n") : buffer.append("m\(text)\u{001b}[0m");
     }
 }

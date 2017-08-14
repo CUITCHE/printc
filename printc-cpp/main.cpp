@@ -11,8 +11,17 @@
 using namespace printcolor;
 
 int main(int argc, const char * argv[]) {
+    // test printc method
     printc().write<red>("int").write(" main(").write<red>("int").write(" argc, ").write<red>("char ").write<purple>("*")
-    .write("argv[]) {\n").write<navy>("    printf").write<bold, red>("\"Hello World!\"").write(");\n")
-    .write<red>("    return ").write("0;\n}\n").write<obscure, purple>("\t\t\tby: printc\n");
+    .writeln("argv[]) {").write<navy>("    printf").write<bold, red>("\"Hello World!\"").writeln(");")
+    .write<red>("    return ").write("0;\n}\n").writeln<obscure, purple>("\t\t\tby: printc");
+
+    // test static method
+    printc::print<Purple, white>("Once upon a time....");
+    printc::println<Red, black>("Once upon a time");
+
+    // test take method
+    auto buf = printc().writeln<red>("take buffer test").takeAssembleBuffer();
+    fputs(buf.c_str(), stderr);
     return 0;
 }

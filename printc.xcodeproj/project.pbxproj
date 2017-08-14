@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FB8D52051F1CB85000C1C299 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D52041F1CB85000C1C299 /* main.swift */; };
-		FB8D520A1F1CB88E00C1C299 /* printc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D52091F1CB88E00C1C299 /* printc.swift */; };
+		FB9B62061F41A48400260903 /* printc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9B62051F41A47600260903 /* printc.swift */; };
 		FBCC672C1F399B2D00FB0CFC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCC672B1F399B2D00FB0CFC /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -36,10 +36,10 @@
 /* Begin PBXFileReference section */
 		FB8D52021F1CB85000C1C299 /* printc-swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "printc-swift"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB8D52041F1CB85000C1C299 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		FB8D52091F1CB88E00C1C299 /* printc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = printc.swift; sourceTree = "<group>"; };
+		FB9B62031F41A47600260903 /* printc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = printc.hpp; sourceTree = "<group>"; };
+		FB9B62051F41A47600260903 /* printc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = printc.swift; sourceTree = "<group>"; };
 		FBCC67291F399B2D00FB0CFC /* printc-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "printc-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBCC672B1F399B2D00FB0CFC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		FBCC67311F399B4100FB0CFC /* printc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = printc.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +63,7 @@
 		FB8D51E81F1CAEED00C1C299 = {
 			isa = PBXGroup;
 			children = (
+				FB9B62011F41A47600260903 /* src */,
 				FB8D52031F1CB85000C1C299 /* printc-swift */,
 				FBCC672A1F399B2D00FB0CFC /* printc-cpp */,
 				FB8D51F21F1CAEED00C1C299 /* Products */,
@@ -82,16 +83,39 @@
 			isa = PBXGroup;
 			children = (
 				FB8D52041F1CB85000C1C299 /* main.swift */,
-				FB8D52091F1CB88E00C1C299 /* printc.swift */,
 			);
 			path = "printc-swift";
+			sourceTree = "<group>";
+		};
+		FB9B62011F41A47600260903 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				FB9B62021F41A47600260903 /* C++ */,
+				FB9B62041F41A47600260903 /* Swfit */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		FB9B62021F41A47600260903 /* C++ */ = {
+			isa = PBXGroup;
+			children = (
+				FB9B62031F41A47600260903 /* printc.hpp */,
+			);
+			path = "C++";
+			sourceTree = "<group>";
+		};
+		FB9B62041F41A47600260903 /* Swfit */ = {
+			isa = PBXGroup;
+			children = (
+				FB9B62051F41A47600260903 /* printc.swift */,
+			);
+			path = Swfit;
 			sourceTree = "<group>";
 		};
 		FBCC672A1F399B2D00FB0CFC /* printc-cpp */ = {
 			isa = PBXGroup;
 			children = (
 				FBCC672B1F399B2D00FB0CFC /* main.cpp */,
-				FBCC67311F399B4100FB0CFC /* printc.hpp */,
 			);
 			path = "printc-cpp";
 			sourceTree = "<group>";
@@ -178,7 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8D52051F1CB85000C1C299 /* main.swift in Sources */,
-				FB8D520A1F1CB88E00C1C299 /* printc.swift in Sources */,
+				FB9B62061F41A48400260903 /* printc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

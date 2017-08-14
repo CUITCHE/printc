@@ -84,23 +84,36 @@ namespace printcolor {
         template<Mark ...marks>
         inline printc& write(const char *text);
 
+        template<Mark ...marks>
+        inline printc& writeln(const char *text);
+
         template<typename... Args>
         inline printc& write(Args&& ...args);
 
         template<Mark ...marks>
         static inline void print(const char *text);
 
+        template<Mark ...marks>
+        static inline void println(const char *text);
+
         std::string takeAssembleBuffer() { auto buf = this->buf; this->buf.clear(); return buf; }
 
     private:
         template<size_t arraySize>
-        static void assemble(const char *text, std::string &buf, const std::array<Mark, arraySize> &marks);
+        static void assemble(const char *text, std::string &buf, const std::array<Mark, arraySize> &marks, bool appendNewline = false);
     };
 
     template<Mark ...marks>
     inline printc& printc::write(const char *text)
     {
         printc::assemble<sizeof...(marks)>(text, this->buf, { std::forward<Mark>(marks)... });
+        return *this;
+    }
+
+    template<Mark ...marks>
+    inline printc& printc::writeln(const char *text)
+    {
+        printc::assemble<sizeof...(marks)>(text, this->buf, { std::forward<Mark>(marks)... }, true);
         return *this;
     }
 
@@ -118,13 +131,22 @@ namespace printcolor {
     {
         std::string buffer;
         assemble<sizeof...(marks)>(text, buffer, { std::forward<Mark>(marks)... });
+        fputs(buffer.c_str(), stderr);
+    }
+
+    template<Mark ...marks>
+    inline void printc::println(const char *text)
+    {
+        std::string buffer;
+        assemble<sizeof...(marks)>(text, buffer, { std::forward<Mark>(marks)... }, true);
+        fputs(buffer.c_str(), stderr);
     }
     
     template<size_t arraySize>
-    void printc::assemble(const char *text ,std::string &buf, const std::array<Mark, arraySize> &marks)
+    void printc::assemble(const char *text ,std::string &buf, const std::array<Mark, arraySize> &marks, bool appendNewline/* = false*/)
     {
         if (arraySize == 0) {
-            buf.append(text);
+            appendNewline ? buf.append(text).append(1, '\n') : buf.append(text);
             return;
         }
         buf.append("\033[");
@@ -132,8 +154,8 @@ namespace printcolor {
             buf.append(mark2str(mark));
         }
         buf.pop_back();
-        buf.append(1, 'm').append(text).append("\033[0m");
-        
+        buf.append(1, 'm').append(text);
+        appendNewline ? buf.append("\033[0m\n") : buf.append("\033[0m");
     }
     
 }
