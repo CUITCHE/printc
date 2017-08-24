@@ -7,6 +7,7 @@
 //
 
 #include "printc.hpp"
+#include <thread>
 
 using namespace printcolor;
 
@@ -23,5 +24,11 @@ int main(int argc, const char * argv[]) {
     // test take method
     auto buf = printc().writeln<red>("take buffer test").takeAssembleBuffer();
     fputs(buf.c_str(), stderr);
+    int i = -1;
+    while (++i < 101) {
+        printc::console::drawProgressBar(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+    fputs("\n", printc::console::IORedirector);
     return 0;
 }

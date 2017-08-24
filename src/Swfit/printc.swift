@@ -27,6 +27,111 @@ import Foundation
 ///
 /// Also see function notes.
 open class printc {
+
+    /// CConfigurate console, such as cursor, I/O redirect.
+    public struct console {
+        fileprivate class Progressbar {
+            private static var progressBarSymbols = ["😀","😃","😄","😁","😆","😂","☺️","😊","🙂","😉","😌","😍","😘","😋","⚽️","🏀","🏈","⚾️","🎾","🏐","🏉","🎱","🏓","☯","🀫","🀰","〒"]
+            let symbol       = progressBarSymbols[Int(arc4random()) % progressBarSymbols.count]
+            let columns: Int = {
+                var c = console.columns
+                if c > 80 {
+                    c = 80
+                }
+                return c
+            }()
+            let isMultiThread: Bool
+
+            init(isMultiThread: Bool = true) {
+                console.isHideCursor = true
+                self.isMultiThread = isMultiThread
+            }
+
+            deinit {
+                console.isHideCursor = false
+            }
+
+            func draw(with progress: Int) {
+                if columns > 10 {
+                    let progressString = "\(progress)%"
+                    let rest = columns - progressString.characters.count
+                    let rate = Double(progress) / 100.0
+                    let doneInt = Int(Double(rest) * rate)
+                    let block = {
+                        printc.print(text: "\r")
+                        // print done
+                        printc.print(text: "\((0..<doneInt / 2).map({ _ in return "\(self.symbol) " }).joined())")
+                        // print will-do and rate
+                        printc.print(text: "\((0..<(rest - doneInt + ((doneInt & 1) == 1 ? 1: 0))).map({ _ in return " " }).joined())\(progressString)")
+                        if progress >= 100 {
+                            Progressbar.progressbar = nil
+                        }
+                    }
+                    if isMultiThread {
+                        if Thread.isMainThread {
+                            block()
+                        } else {
+                            DispatchQueue.main.sync(execute: block)
+                        }
+                    } else {
+                        block()
+                    }
+                }
+            }
+
+            static var progressbar: Progressbar? = nil
+        }
+
+
+        /// Hide cursor or not. Default is false.
+        public static var isHideCursor = false {
+            didSet {
+                if isHideCursor {
+                    fputs("\u{001b}[?25l", console.IORedirector)
+                } else {
+                    fputs("\u{001b}[?25h", console.IORedirector)
+                }
+            }
+        }
+
+        /// I/O redirect. Default is stderr.
+        public static var IORedirector: UnsafeMutablePointer<FILE> = stderr
+
+        /// Get columns of console.
+        public static var columns: Int {
+            var size = winsize.init()
+            if ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) >= 0 {
+                return Int(size.ws_col)
+            }
+            return 0
+        }
+
+        /// Get rows of console.
+        public static var rows: Int {
+            var size = winsize.init()
+            if ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) >= 0 {
+                return Int(size.ws_row)
+            }
+            return 0
+        }
+
+        public static func drawProgressBar(with progress: Int, drawInMultiThread: Bool = false) {
+            guard progress <= 100 else { return }
+            if Progressbar.progressbar == nil {
+                if drawInMultiThread {
+                    objc_sync_enter(printc.self)
+                    if Progressbar.progressbar == nil {
+                        Progressbar.progressbar = Progressbar.init(isMultiThread: true)
+                    }
+                    objc_sync_exit(printc.self)
+                } else {
+                    Progressbar.progressbar = Progressbar.init(isMultiThread: false)
+                }
+            }
+            Progressbar.progressbar!.draw(with: progress)
+        }
+
+    }
     private var buf: String = ""
 
     public enum Mark: UInt {
@@ -53,15 +158,11 @@ open class printc {
         case black = 30, red, green, yellow, blue, purple, navy, white
         /// Background colors
         case Black = 40, Red, Green, Yellow, Blue, Purple, Navy, White
-
-        public var rawVal: UInt {
-            return self.rawValue
-        }
     }
 
     deinit {
         if buf.characters.count != 0 {
-            fputs(buf, stderr)
+            fputs(buf, console.IORedirector)
         }
     }
 
@@ -122,7 +223,7 @@ open class printc {
     public static func print(text: String, marks: Mark...) {
         var buffer = ""
         assemble(text: text, in: &buffer, with: marks)
-        fputs(buffer, stderr)
+        fputs(buffer, console.IORedirector)
     }
 
     /// Print the text with marks and '\n'
@@ -133,7 +234,7 @@ open class printc {
     public static func println(text: String, marks: Mark...) {
         var buffer = ""
         assemble(text: text, in: &buffer, with: marks, appendNewline: true)
-        fputs(buffer, stderr)
+        fputs(buffer, console.IORedirector)
     }
 
     /// Return the buffer and clean the buffer. If you use this method that means you want
@@ -156,7 +257,7 @@ fileprivate extension printc {
         }
         buffer.append("\u{001b}[")
         for m in marks {
-            buffer.append("\(m.rawVal);")
+            buffer.append("\(m.rawValue);")
         }
         buffer.remove(at: buffer.index(before: buffer.endIndex))
         appendNewline ? buffer.append("m\(text)\u{001b}[0m\n") : buffer.append("m\(text)\u{001b}[0m");

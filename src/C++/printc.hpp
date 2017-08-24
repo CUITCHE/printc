@@ -77,9 +77,17 @@ namespace printcolor {
     }
 
     struct printc {
+        struct console {
+            static void hideCursor(bool hide);
+            static FILE *IORedirector;
+            static int colunms();
+            static int rows();
+            static void drawProgressBar(int progress, bool drawInMultiThread = false);
+        };
+    private:
         std::string buf;
     public:
-        ~printc() { if (buf.size() != 0) fputs(buf.c_str(), stderr); }
+        ~printc() { if (buf.size() != 0) fputs(buf.c_str(), console::IORedirector); }
 
         template<Mark ...marks>
         inline printc& write(const char *text);
@@ -131,7 +139,7 @@ namespace printcolor {
     {
         std::string buffer;
         assemble<sizeof...(marks)>(text, buffer, { std::forward<Mark>(marks)... });
-        fputs(buffer.c_str(), stderr);
+        fputs(buffer.c_str(), console::IORedirector);
     }
 
     template<Mark ...marks>
@@ -139,7 +147,7 @@ namespace printcolor {
     {
         std::string buffer;
         assemble<sizeof...(marks)>(text, buffer, { std::forward<Mark>(marks)... }, true);
-        fputs(buffer.c_str(), stderr);
+        fputs(buffer.c_str(), console::IORedirector);
     }
     
     template<size_t arraySize>
