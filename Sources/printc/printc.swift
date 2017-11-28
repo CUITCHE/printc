@@ -7,6 +7,10 @@
 //
 
 import Foundation
+import Dispatch
+#if os(Linux)
+import SwiftGlibc
+#endif
 
 
 /// Use `printc` to print color text on command applications.
@@ -67,11 +71,7 @@ open class printc {
                         }
                     }
                     if isMultiThread {
-                        if Thread.isMainThread {
-                            block()
-                        } else {
-                            DispatchQueue.main.sync(execute: block)
-                        }
+                        Thread.isMainThread ? block() : DispatchQueue.main.sync(execute: block)
                     } else {
                         block()
                     }
@@ -99,7 +99,7 @@ open class printc {
         /// Get columns of console.
         public static var columns: Int {
             var size = winsize.init()
-            if ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) >= 0 {
+            if ioctl(CInt(STDOUT_FILENO), UInt(TIOCGWINSZ), &size) >= 0 {
                 return Int(size.ws_col)
             }
             return 0
@@ -108,7 +108,7 @@ open class printc {
         /// Get rows of console.
         public static var rows: Int {
             var size = winsize.init()
-            if ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) >= 0 {
+            if ioctl(CInt(STDOUT_FILENO), UInt(TIOCGWINSZ), &size) >= 0 {
                 return Int(size.ws_row)
             }
             return 0
@@ -118,11 +118,14 @@ open class printc {
             guard progress <= 100 else { return }
             if Progressbar.progressbar == nil {
                 if drawInMultiThread {
-                    objc_sync_enter(printc.self)
-                    if Progressbar.progressbar == nil {
-                        Progressbar.progressbar = Progressbar.init(isMultiThread: true)
+                    func judge() {
+                        if Progressbar.progressbar == nil {
+                            Progressbar.progressbar = Progressbar.init(isMultiThread: true)
+                        }
                     }
-                    objc_sync_exit(printc.self)
+                    Thread.isMainThread ? judge() : DispatchQueue.main.sync {
+                        judge()
+                    }
                 } else {
                     Progressbar.progressbar = Progressbar.init(isMultiThread: false)
                 }
