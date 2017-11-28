@@ -53,7 +53,7 @@ open class printc {
             func draw(with progress: Int) {
                 if columns > 10 {
                     let progressString = "\(progress)%"
-                    let rest = columns - progressString.characters.count
+                    let rest = columns - progressString.count
                     let rate = Double(progress) / 100.0
                     let doneInt = Int(Double(rest) * rate)
                     let block = {
@@ -159,7 +159,7 @@ open class printc {
     }
 
     deinit {
-        if buf.characters.count != 0 {
+        if !buf.isEmpty {
             fputs(buf, console.IORedirector)
         }
     }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		FB8D52051F1CB85000C1C299 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8D52041F1CB85000C1C299 /* main.swift */; };
 		FB982E0E1F4EB4B900354316 /* printc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FB982E0D1F4EB4B900354316 /* printc.cpp */; };
-		FB9B62061F41A48400260903 /* printc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9B62051F41A47600260903 /* printc.swift */; };
+		FB9E8CE31FCD05DE00545E52 /* printc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9E8CE21FCD05DE00545E52 /* printc.swift */; };
 		FBCC672C1F399B2D00FB0CFC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCC672B1F399B2D00FB0CFC /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +39,7 @@
 		FB8D52041F1CB85000C1C299 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FB982E0D1F4EB4B900354316 /* printc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = printc.cpp; sourceTree = "<group>"; };
 		FB9B62031F41A47600260903 /* printc.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = printc.hpp; sourceTree = "<group>"; };
-		FB9B62051F41A47600260903 /* printc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = printc.swift; sourceTree = "<group>"; };
+		FB9E8CE21FCD05DE00545E52 /* printc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = printc.swift; path = Sources/printc/printc.swift; sourceTree = SOURCE_ROOT; };
 		FBCC67291F399B2D00FB0CFC /* printc-cpp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "printc-cpp"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBCC672B1F399B2D00FB0CFC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,7 +110,7 @@
 		FB9B62041F41A47600260903 /* Swfit */ = {
 			isa = PBXGroup;
 			children = (
-				FB9B62051F41A47600260903 /* printc.swift */,
+				FB9E8CE21FCD05DE00545E52 /* printc.swift */,
 			);
 			path = Swfit;
 			sourceTree = "<group>";
@@ -205,7 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB8D52051F1CB85000C1C299 /* main.swift in Sources */,
-				FB9B62061F41A48400260903 /* printc.swift in Sources */,
+				FB9E8CE31FCD05DE00545E52 /* printc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
