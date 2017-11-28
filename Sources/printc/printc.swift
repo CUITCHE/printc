@@ -22,7 +22,7 @@ import SwiftGlibc
 ///     // Prints "Hello" whose foreground color is red.
 ///
 /// Use printc object to assemble some colorful words, and print them before the object destroying.
-/// Contact write clause by `_` function. That looks like concise.
+/// Contact write clause by write function. That looks like concise.
 ///
 ///     printc.write("int ", .red).write("main(").write("int", .red)
 ///     .write(" argc, ").write("char ", .red).write("*", .purple)
@@ -114,6 +114,11 @@ open class printc {
             return 0
         }
 
+        /// Draw progress bar with symbol('#') in console.
+        ///
+        /// - Parameters:
+        ///   - progress: A range from 0 to 100.
+        ///   - drawInMultiThread: Assign to true if execute on mutil-thread. Default is false.
         public static func drawProgressBar(with progress: Int, drawInMultiThread: Bool = false) {
             guard progress <= 100 else { return }
             if Progressbar.progressbar == nil {
@@ -213,7 +218,7 @@ open class printc {
         return self
     }
 
-    /// Write the str with a '\n' character. Use `_`(::) or write(::) method
+    /// Write the str with a '\n' character. Use write(::) method
     /// to write str which you want to write a '\n' may be like:
     ///
     ///     printc.write("Mark the str contains \\n in mark code.\n", .red)
@@ -253,8 +258,8 @@ open class printc {
         fputs(buffer, console.IORedirector)
     }
 
-    /// Return the buffer and clean the buffer. If you use this method that means you want
-    /// to controle the buffer.
+    /// Return the buffer and clean the buffer of current object. If you use this method that means you want to control
+    /// the buffer.
     ///
     /// - Returns: String buffer content.
     public func takeAssembleBuffer() -> String {
