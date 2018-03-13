@@ -137,6 +137,11 @@ open class printc {
             }
             Progressbar.progressbar!.draw(with: progress)
         }
+
+        /// Execute console order 'clear'.
+        public static func clear() {
+            fputs("\u{001b}c", console.IORedirector)
+        }
     }
     private var buf: String = ""
 
